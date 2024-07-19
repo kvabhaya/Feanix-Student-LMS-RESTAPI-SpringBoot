@@ -1,4 +1,4 @@
-package com.devstack.lms.feanix;
+package com.devstack.ecom.feanix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
