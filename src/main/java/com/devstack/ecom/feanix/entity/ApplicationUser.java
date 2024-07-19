@@ -25,6 +25,6 @@ public class ApplicationUser {
     private String password;
     @Column(name = "address", length = 750, nullable = false)
     private String address;
-    @OneToMany(mappedBy = user)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //fetch-applicationUser ekkama eyage bind wela thiyen data tikath enwa
     private Set<CustomerOrder> customerOrders = new HashSet<>();
 }
