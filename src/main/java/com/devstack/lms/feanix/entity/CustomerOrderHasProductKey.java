@@ -1,4 +1,4 @@
-package com.devstack.ecom.feanix.entity;
+package com.devstack.lms.feanix.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
