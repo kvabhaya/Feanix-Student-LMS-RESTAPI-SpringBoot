@@ -8,6 +8,8 @@ import lombok.Setter;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "customer_order")
 @Getter
@@ -28,4 +30,10 @@ public class CustomerOrder {
     @ManyToOne
     @JoinColumn(name = "user", nullable = false)
     private ApplicationUser user;
+
+    @OneToMany(mappedBy = "customerOrder")
+    private Set<CustomerOrderDetails> orderDetails = new HashSet<>();
+
+    @OneToOne(mappedBy = "customerOrder")
+    private Payment payment;
 }
