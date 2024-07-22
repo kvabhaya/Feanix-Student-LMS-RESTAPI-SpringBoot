@@ -31,6 +31,19 @@ public class ProductServiceImpl implements ProductService {
         return toResponseProductDto(selectedProduct.get());
     }
 
+    @Override
+    public void update(RequestProductDto requestProductDto, String productId) {
+        Optional<Product> selectedProduct = repository.findById(productId);
+        if(selectedProduct.isEmpty()){
+            throw new RuntimeException("Product not found");
+        }
+        Product product = selectedProduct.get();
+        product.setDescription(requestProductDto.getDescription());
+        product.setUnitPrice(requestProductDto.getUnitPrice());
+        product.setQtyOnHand(requestProductDto.getQtyOnHand());
+        repository.save(product);
+    }
+
     private Product toProduct(RequestProductDto dto){
         if(dto==null) return null;
         return Product.builder()
