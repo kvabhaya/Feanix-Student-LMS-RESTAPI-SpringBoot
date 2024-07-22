@@ -1,5 +1,6 @@
 package com.devstack.lms.feanix.service.impl;
 
+import com.devstack.lms.feanix.dto.paginate.ResponseProductPaginateDto;
 import com.devstack.lms.feanix.dto.request.RequestProductDto;
 import com.devstack.lms.feanix.dto.response.ResponseProductDto;
 import com.devstack.lms.feanix.entity.Product;
@@ -7,6 +8,7 @@ import com.devstack.lms.feanix.repository.ProductRepository;
 import com.devstack.lms.feanix.service.ProductService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -47,6 +49,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(String productId) {
         repository.deleteById(productId);
+    }
+
+    @Override
+    public ResponseProductPaginateDto search(String searchText, int page, int size) {
+        return ResponseProductPaginateDto.builder()
+                .count(repository.searchCount(searchText))
+                .dataList(repository.searchAll(searchText, PageRequest.of(page,size))
+                        .stream().map(this::toResponseProductDto).toList())
+                .build();
     }
 
     private Product toProduct(RequestProductDto dto){

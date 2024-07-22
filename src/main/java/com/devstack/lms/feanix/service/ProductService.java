@@ -1,5 +1,6 @@
 package com.devstack.lms.feanix.service;
 
+import com.devstack.lms.feanix.dto.paginate.ResponseProductPaginateDto;
 import com.devstack.lms.feanix.dto.request.RequestProductDto;
 import com.devstack.lms.feanix.dto.response.ResponseProductDto;
 
@@ -8,4 +9,5 @@ public interface ProductService {
     public ResponseProductDto findById(String productId);
     public void update(RequestProductDto requestProductDto, String productId);
     public void delete(String productId);
+    public ResponseProductPaginateDto search(String searchText, int page, int size);
 }

@@ -1,5 +1,6 @@
 package com.devstack.lms.feanix.api;
 
+import com.devstack.lms.feanix.dto.paginate.ResponseProductPaginateDto;
 import com.devstack.lms.feanix.dto.request.RequestProductDto;
 import com.devstack.lms.feanix.dto.response.ResponseProductDto;
 import com.devstack.lms.feanix.service.ProductService;
@@ -31,5 +32,13 @@ public class ProductController {
     public String delete(@PathVariable String productId){
         productService.delete(productId);
         return "Deleted";
+    }
+    @GetMapping("/search")
+    public ResponseProductPaginateDto search(
+            @RequestParam String searchText,
+            @RequestParam int page,
+            @RequestParam int size
+    ){
+        return productService.search(searchText,page,size);
     }
 }
