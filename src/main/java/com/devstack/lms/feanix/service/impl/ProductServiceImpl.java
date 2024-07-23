@@ -7,6 +7,7 @@ import com.devstack.lms.feanix.entity.Product;
 import com.devstack.lms.feanix.exception.EntryNotFoundException;
 import com.devstack.lms.feanix.repository.ProductRepository;
 import com.devstack.lms.feanix.service.ProductService;
+import com.devstack.lms.feanix.util.IdGenerator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository repository;
+    private final IdGenerator idGenerator;
     @Override
     public void create(RequestProductDto requestProductDto) {
         repository.save(toProduct(requestProductDto));
@@ -64,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
     private Product toProduct(RequestProductDto dto){
         if(dto==null) return null;
         return Product.builder()
-                .productId(UUID.randomUUID().toString())
+                .productId(idGenerator.generate())
                 .description(dto.getDescription())
                 .fileResource(null)
                 .orderDetails(null)
