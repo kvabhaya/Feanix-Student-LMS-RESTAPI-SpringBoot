@@ -4,6 +4,7 @@ import com.devstack.lms.feanix.dto.paginate.ResponseProductPaginateDto;
 import com.devstack.lms.feanix.dto.request.RequestProductDto;
 import com.devstack.lms.feanix.dto.response.ResponseProductDto;
 import com.devstack.lms.feanix.entity.Product;
+import com.devstack.lms.feanix.exception.EntryNotFoundException;
 import com.devstack.lms.feanix.repository.ProductRepository;
 import com.devstack.lms.feanix.service.ProductService;
 import jakarta.transaction.Transactional;
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public ResponseProductDto findById(String productId) {
         Optional<Product> selectedProduct = repository.findById(productId);
         if(selectedProduct.isEmpty()){
-            return null;
+            throw new EntryNotFoundException("Product not found");
         }
         return toResponseProductDto(selectedProduct.get());
     }
@@ -37,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
     public void update(RequestProductDto requestProductDto, String productId) {
         Optional<Product> selectedProduct = repository.findById(productId);
         if(selectedProduct.isEmpty()){
-            throw new RuntimeException("Product not found");
+            throw new EntryNotFoundException("Product not found");
         }
         Product product = selectedProduct.get();
         product.setDescription(requestProductDto.getDescription());
