@@ -1,5 +1,6 @@
 package com.devstack.lms.feanix.service.impl;
 
+import com.devstack.lms.feanix.dto.request.RequestUserDto;
 import com.devstack.lms.feanix.entity.ApplicationUser;
 import com.devstack.lms.feanix.entity.UserRole;
 import com.devstack.lms.feanix.exception.EntryNotFoundException;
@@ -49,5 +50,10 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
                 selectedUserData.get().isEnabled(),
                 grantedAuthorities
         );
+    }
+
+    @Override
+    public void create(RequestUserDto dto) {
+
     }
 }
