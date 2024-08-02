@@ -15,15 +15,4 @@ public class RequestUserDto {
     private String password;
     private String address;
 
-    @Column(name = "isAccountNonExpired", columnDefinition = "TINYINT")
-    private boolean isAccountNonExpired;
-    @Column(name = "isAccountNonLocked", columnDefinition = "TINYINT")
-    private boolean isAccountNonLocked;
-    @Column(name = "isCredentialNonExpired", columnDefinition = "TINYINT")
-    private boolean isCredentialNonExpired;
-    @Column(name = "isEnabled", columnDefinition = "TINYINT")
-    private boolean isEnabled;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //fetch-applicationUser ekkama eyage bind wela thiyen data tikath enwa
-    private Set<CustomerOrder> customerOrders = new HashSet<>();
 }
