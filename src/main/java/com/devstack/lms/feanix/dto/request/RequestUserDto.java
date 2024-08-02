@@ -1,14 +1,14 @@
 package com.devstack.lms.feanix.dto.request;
 
-import com.devstack.lms.feanix.entity.CustomerOrder;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
-
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RequestUserDto {
 
     private String username;
