@@ -52,7 +52,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfiguration {
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control","Content-Type"));
         corsConfiguration.setAllowedOrigins(List.of("*"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "OPTION", "PATCH"));
-        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowCredentials(false);
         corsConfiguration.setExposedHeaders(List.of("Authorization"));
 
         http.csrf(AbstractHttpConfigurer::disable)
