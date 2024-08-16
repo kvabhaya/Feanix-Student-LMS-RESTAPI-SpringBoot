@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+  <input type="email" formControlName="username" placeholder="username"> &nbsp;
+  <input type="password" formControlName="password" placeholder="password"> &nbsp;
+  <input type="text" formControlName="address" placeholder="address"> &nbsp;
+  <input type="submit" value="Signup">
+  <br>
+  <br>
+  <a routerLink="/login">already have an account?</a>
+</form>
