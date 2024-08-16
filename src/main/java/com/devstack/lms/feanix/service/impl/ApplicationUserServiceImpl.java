@@ -66,6 +66,37 @@ public class ApplicationUserServiceImpl implements ApplicationUserService {
         }
         userRepo.save(createApplicationUser(dto));
     }
+
+    @Override
+    public void initializeAdmin() {
+        Optional<ApplicationUser> selectedUser = userRepo.findByUsername("hasikasandaruwan.info@gmail.com");
+        if (selectedUser.isPresent()) {
+            return;
+        }
+
+        Optional<UserRole> selectedRole = roleRepo.findByRoleName("ADMIN");
+        if (selectedRole.isEmpty()) {
+            throw new EntryNotFoundException("role not found.");
+        }
+
+        Set<UserRole> selectedRoles = new HashSet<>();
+        selectedRoles.add(selectedRole.get());
+
+
+        userRepo.save(
+                ApplicationUser.builder()
+                        .userId(UUID.randomUUID().toString())
+                        .username("hasikasandaruwan.info@gmail.com")
+                        .password(passwordEncoder.encode("1234")) // must be encrypted //
+                        .address("admin address")
+                        .roles(selectedRoles)
+                        .isAccountNonExpired(true)
+                        .isAccountNonLocked(true)
+                        .isCredentialNonExpired(true)
+                        .isEnabled(true).build()
+        );
+    }
+
     private ApplicationUser createApplicationUser(RequestUserDto dto){
         if(dto==null){
             throw new RuntimeException("Something went wrong..");
